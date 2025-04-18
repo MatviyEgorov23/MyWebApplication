@@ -1,0 +1,52 @@
+﻿@page
+@model WebApplication_AuthenticationSystem_.Areas.Identity.Pages.Clients.ChatModel
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>💬 Chat Room</h2>
+
+<form method="post">
+    <div class="form-group">
+        <textarea asp-for="NewMessage" class="form-control" placeholder="Type your message..."></textarea>
+    </div>
+    <button type="submit" asp-page-handler="Send" class="btn btn-success mt-2">Send</button>
+</form>
+
+<hr />
+
+<h4>Messages</h4>
+@foreach (var msg in Model.Messages)
+{
+    <div class="border p-2 mb-2">
+        <div class="d-flex justify-content-between">
+            <div>
+                <b>@msg.UserId</b>
+                <small class="text-muted">@msg.CreatedAt.ToString("g")</small>
+                @if (msg.UpdatedAt != null)
+                {
+                    <span class="text-muted">(edited)</span>
+                }
+                <p>@msg.MessageText</p>
+            </div>
+
+            @if (msg.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+            {
+                <div class="text-end">
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@msg.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">🗑️</button>
+                    </form>
+                </div>
+            }
+        </div>
+
+        @if (msg.UserId == User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value)
+        {
+            <form method="post" asp-page-handler="Edit" class="mt-1">
+                <input type="hidden" name="EditMessageId" value="@msg.Id" />
+                <input type="text" name="EditMessageText" value="@msg.MessageText" class="form-control mb-1" />
+                <button type="submit" class="btn btn-primary">✏️</button>
+            </form>
+        }
+    </div>
+}

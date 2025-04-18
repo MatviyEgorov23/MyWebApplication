@@ -1,0 +1,57 @@
+﻿@page
+@model WebApplication_AuthenticationSystem_.Areas.Identity.Pages.Clients.IndexModel
+@{
+    
+}
+
+<br>
+<h2>List of Clients</h2>
+<a class='btn btn-primary bth-sm' asp-area="Identity" asp-page="/Clients/Create">New Client</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.listClients[0].firstname)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.listClients[0].lastname)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.listClients[0].email)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.listClients[0].id)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.listClients[0].phone)
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var client in Model.listClients)
+    {
+           <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => client.firstname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => client.lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => client.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => client.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => client.phone)
+                    </td>
+                    <td>
+                        <a asp-area="Identity" asp-page="/Clients/Edit" asp-route-id="@client.id" class="btn btn-primary"><i class="fa fa-eye"></i> Edit</a>
+                        <a asp-area="Identity" asp-page="/Clients/Delete" asp-route-id="@client.id" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                    </td>
+           </tr>
+    }
+    </tbody>
+</table>
