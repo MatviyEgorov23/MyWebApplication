@@ -1,0 +1,37 @@
+@model WebApplication_AuthenticationSystem_.Models.Product
+
+@{
+    ViewData["Title"] = "Placing an order";
+}
+
+<h2>Placing an order</h2>
+
+<div>
+    <h4>You order:</h4>
+    <p><strong>@Model.Name</strong> от @Model.Brand</p>
+    <p>Category: @Model.Category</p>
+    <p>Price: @Model.Price$</p>
+    <img src="~/products/@Model.ImageFileName" style="max-width:200px;" />
+</div>
+
+<form asp-action="ConfirmOrder" method="post" class="mt-4">
+    <input type="hidden" name="ProductId" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="PostalCode">Postal Code</label>
+        <input type="text" class="form-control" name="PostalCode" id="PostalCode" required />
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="PaymentMethod">Payment Method</label>
+        <select class="form-control" name="PaymentMethod" id="PaymentMethod" required>
+            <option value="">-- Select --</option>
+            <option value="CreditCard">Credit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="CashOnDelivery">Cash on Delivery</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-4" disabled title="Ordering is not available yet">Confirm order</button>
+    <a asp-action="Index" class="btn btn-secondary mt-4">Cancel</a>
+</form>
