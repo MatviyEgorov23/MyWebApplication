@@ -1,4 +1,4 @@
-﻿@model List<WebApplication_AuthenticationSystem_.Models.Product>
+@model List<WebApplication_AuthenticationSystem_.Models.Product>
 @{
 }
 
@@ -41,7 +41,9 @@
                     <a class="btn btn-primary btn-sm" asp-controller="Products" asp-action="Edit"
                     asp-route-id="@product.Id">Edit</a>
                     <a class="btn btn-danger btn-sm" asp-controller="Products" asp-action="Delete"
-                       asp-route-id="@product.Id">Delete</a>
+                    asp-route-id="@product.Id">Delete</a>
+                    <a class="btn btn-success btn-sm" asp-controller="Products" asp-action="Order" 
+                    asp-route-id="@product.Id">Make Order</a>
                 </td>
             </tr>
         }
