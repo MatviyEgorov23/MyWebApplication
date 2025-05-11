@@ -8,7 +8,7 @@
 
 <div>
     <h4>You order:</h4>
-    <p><strong>@Model.Name</strong> от @Model.Brand</p>
+    <p><strong>@Model.Name</strong> from @Model.Brand</p>
     <p>Category: @Model.Category</p>
     <p>Price: @Model.Price$</p>
     <img src="~/products/@Model.ImageFileName" style="max-width:200px;" />
@@ -32,6 +32,6 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-success mt-4" disabled title="Ordering is not available yet">Confirm order</button>
+    <button type="submit" class="btn btn-success mt-4">Confirm order</button>
     <a asp-action="Index" class="btn btn-secondary mt-4">Cancel</a>
 </form>
